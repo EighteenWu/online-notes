@@ -11,7 +11,6 @@
     - 杂项
         - [windows下tree命令](/misc/windows下tree命令.md)
     - 面试
-        - [面试常见问题](/misc/testing/面试常见问题.md)
         - [Linux基础](/misc/testing/Linux基础.md)
         - [mysql基础](/misc/testing/mysql基础.md)
         - [性能测试](/misc/testing/性能测试.md)
