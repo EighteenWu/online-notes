@@ -11,3 +11,9 @@
     - 杂项
         - [windows下tree命令](/misc/windows下tree命令.md)
         - [Testing](/misc/testing/面试常见问题.md)
+        - [Testing](/misc/testing/Linux基础.md)
+        - [Testing](/misc/testing/mysql基础.md)
+        - [Testing](/misc/testing/性能测试.md)
+        - [Testing](/misc/testing/Python常见面试问题.md)
+        - [Testing](/misc/testing/测试基础.md)
+        - [Testing](/misc/testing/CICD.md)
