@@ -10,10 +10,11 @@
             - [踩坑记录](/python/fastapi/踩坑记录.md)
     - 杂项
         - [windows下tree命令](/misc/windows下tree命令.md)
-        - [Testing](/misc/testing/面试常见问题.md)
-        - [Testing](/misc/testing/Linux基础.md)
-        - [Testing](/misc/testing/mysql基础.md)
-        - [Testing](/misc/testing/性能测试.md)
-        - [Testing](/misc/testing/Python常见面试问题.md)
-        - [Testing](/misc/testing/测试基础.md)
-        - [Testing](/misc/testing/CICD.md)
+    - 面试
+        - [面试常见问题](/misc/testing/面试常见问题.md)
+        - [Linux基础](/misc/testing/Linux基础.md)
+        - [mysql基础](/misc/testing/mysql基础.md)
+        - [性能测试](/misc/testing/性能测试.md)
+        - [Python常见面试问题](/misc/testing/Python常见面试问题.md)
+        - [测试基础](/misc/testing/测试基础.md)
+        - [CICD](/misc/testing/CICD.md)
