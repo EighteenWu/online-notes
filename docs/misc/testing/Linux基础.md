@@ -3,6 +3,9 @@
 1、如何查看系统版本信息？  
 ```commandline
 uname -a
+uname -r 显示内核版本号
+uname -n 显示系统的网络节点名
+uname -m 显示硬件平台
 cat /proc/version
 ```
 2、查看ip地址?
@@ -30,6 +33,8 @@ service servicename[服务名] operation[操作，比如：restart-重启,start-
 du -sh Crontab  
 s显示整个目录或者文件的大小
 h 可读形势
+du -h | sort -hr
+从大大小展示
 ```
 7、如何查看系统中开放的端口号?
 ```commandline
@@ -67,11 +72,14 @@ linux 系统内文件权限为所有者【owner】、Grup【群组】、other【
 更改权限为chomod 777 filename
 更改文件群组为chgrp
 更改文件所有者为chown
+同时更改文件所属者和文件所属组:
+chown user1:group1 test.txt
 ```
 13、新建、复制、移动、删除文件或目录?
 ```commandline
 touch filename 新增文件
 mkdir dirname 新增目录
+mkdir -p /parent/child/grandchild  递归创建目录
 rmdir dirname  删除空目录
 rm -rf 删除非空目录
 cp root-filename target-flename 复制文件
@@ -192,6 +200,7 @@ Linux test
 HELLO LINUX!  
 This is a linux testfile!  
 ```
+替换动作是`sed 's/old/new/g' file.txt` 则是在测试文件中将old替换为new,g是全局替换
 
 19、 简单说说awk指令？  
 awk指令主要就是将文件逐行的读入，根据空格或者制表符，将每一行分成若干字段，依次用$1,$2,$3代表第一，第二，第三个字段等等；  
@@ -228,7 +237,17 @@ apple
 ```commandline
 awk '{print "Column2: " $2, "Column3: " $3}' data.txt
 ```
+`awk {print $0}` filename,展示一整行的文件内容
 
 20、linux系统如何安装某个服务？
 主要看是什么发行版本，debian用的`apt`，centOS用的的`yum install`或者`dnf install`；安装完成后在etc目录下配置某个服务的，然后正常使用
 `systemctl start nginx`来启动服务
+`apt list --installed` debian查看已经安装的服务
+`yum list --installed` centOS查看已经安装的服务
+
+
+21、查找文件?
+`locate` 用来查找文件，基于文件名数据库
+`find` 用来查找文件
+`whereis` 用来查找文件
+`which` 用来查找文件
