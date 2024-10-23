@@ -73,7 +73,7 @@ linux 系统内文件权限为所有者【owner】、Grup【群组】、other【
 touch filename 新增文件
 mkdir dirname 新增目录
 rmdir dirname  删除空目录
-rm -rm 删除非空目录
+rm -rf 删除非空目录
 cp root-filename target-flename 复制文件
 nv root-file/dir  target-path  移动文件
 ```
@@ -147,6 +147,7 @@ bbbbbbb
 
 参数说明：
 * `-e`  以选项中指定的 script 来处理输入的文本文件，这个-e可以省略，直接写表达式。  
+* `-i`  原地修改文件
 * `-f`<script文件>或--file=<script文件>以选项中指定的 script 文件来处理输入的文本文件。  
 * `-h`或--help显示帮助。  
 * `-n` 或 `--quiet` 或 `--silent` 仅显示 script 处理后的结果。
@@ -168,7 +169,7 @@ Linux is a free unix-type opterating system.
 This is a linux testfile!  
 Linux test
 ```
-增加内容使用命令`sed -i "3a\newline" testfile`则是在测试文件第3行后新增newline，最终文件
+增加内容使用命令`sed -i "3a\nnewline" testfile`则是在测试文件第3行后新增newline，最终文件
 如下所示
 ```commandline
 HELLO LINUX!  
@@ -177,7 +178,7 @@ This is a linux testfile!
 newline
 Linux test
 ```
-插入内容使用命令`sed -i "3i\newline" testfile`则是在测试文件第三行新增newline，最终文件所示
+插入内容使用命令`sed -i "3i\nnewline" testfile`则是在测试文件第三行新增newline，最终文件所示
 如下
 ```commandline
 HELLO LINUX!  
@@ -222,6 +223,10 @@ awk  -F, '{print $2}' test
 则打印的文件内容为,仅有最后一行的第二列内容被打印出来:
 ```commandline
 apple
+```
+题目2: 如何使用 awk 命令从一个文件 data.txt 中提取第二列和第三列的内容，并在每行前加上 "Column2: " 和 "Column3: "？
+```commandline
+awk '{print "Column2: " $2, "Column3: " $3}' data.txt
 ```
 
 20、linux系统如何安装某个服务？
