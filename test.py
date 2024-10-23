@@ -54,7 +54,8 @@ def revs(s):
 def fib(n):
     pred, curr = 0, 1
     k = 0
-    while k < n:print(curr)
+    while k < n:
+        print(curr)
         curr, pred = pred, pred + curr
         k += 1
         print(curr, end=" ")

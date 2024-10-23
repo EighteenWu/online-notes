@@ -225,6 +225,69 @@ def select_sort(alist):
   return alist
 ```
 
+#### **迭代器和生成器的区别:**
+在python中，迭代器(iterator)和生成器(generator)是两种常用于迭代操作的对象，关键区别如下:   
+迭代器（Iterator）和生成器（Generator）是 Python 中用于处理可迭代对象的两种重要机制，它们有一些相似之处，但也有很多不同之处。以下是它们的主要区别：
+
+### 1. 定义方式
+- **迭代器**：迭代器是一个实现了 `__iter__()` 和 `__next__()` 方法的对象。`__iter__()` 方法返回迭代器对象本身，而 `__next__()` 方法返回序列中的下一个元素。
+- **生成器**：生成器是一个使用 `yield` 关键字的函数。当调用生成器函数时，它返回一个生成器对象，该对象可以被迭代。
+
+### 2. 实现方式
+- **迭代器**：迭代器通常需要显式地实现 `__iter__()` 和 `__next__()` 方法。
+- **生成器**：生成器通过在函数中使用 `yield` 关键字来实现，不需要显式地实现 `__iter__()` 和 `__next__()` 方法。
+
+### 3. 内存占用
+- **迭代器**：迭代器通常需要预先存储整个序列，因此在处理大数据集时可能会占用大量内存。
+- **生成器**：生成器是惰性计算的，只有在需要时才会生成下一个值，因此内存占用较低，适合处理大数据集。
+
+### 4. 状态保存
+- **迭代器**：迭代器的状态通常需要手动管理，例如通过维护一个内部计数器或状态变量。
+- **生成器**：生成器会自动保存其执行状态，当生成器函数暂停时，它会记住当前的状态，并在下次调用 `__next__()` 时从暂停的地方继续执行。
+
+### 5. 使用场景
+- **迭代器**：适用于需要对数据进行复杂操作或需要显式控制迭代过程的场景。
+- **生成器**：适用于需要惰性计算、处理大数据集或需要简化迭代逻辑的场景。
+
+### 6. 示例代码
+- **迭代器**：
+  ```python
+  class MyIterator:
+      def __init__(self, data):
+          self.data = data
+          self.index = 0
+
+      def __iter__(self):
+          return self
+
+      def __next__(self):
+          if self.index >= len(self.data):
+              raise StopIteration
+          value = self.data[self.index]
+          self.index += 1
+          return value
+
+  it = MyIterator([1, 2, 3])
+  for i in it:
+      print(i)
+  ```
+
+- **生成器**：
+  ```python
+  def my_generator(data):
+      for item in data:
+          yield item
+
+  gen = my_generator([1, 2, 3])
+  for i in gen:
+      print(i)
+  ```
+
+### 总结
+- **迭代器**：需要显式实现 `__iter__()` 和 `__next__()` 方法，适用于需要复杂控制或显式管理的场景。
+- **生成器**：通过 `yield` 关键字实现，自动管理状态，适用于惰性计算和简化迭代逻辑的场景。
+
+
 # pytest
 
 1、pytest运行用例？  
@@ -304,41 +367,33 @@ def test_sum(data):
 ```
 
 9、 说下你们公司的自动化框架的项目结构？
-
-```python
-# 业务组件封装
---aw
---payment
-payment_commont.py
---c1_task
---account
---finaching
---commmon
-db.py
-auth.py
---...
-# 配置文件
---conf
---sys
-payment.yaml
-account.yaml
-default.yaml
-payment.yaml
-xxx.yaml
---report
---xxx.html
-# 测试案例
---script
---payment
---payment_202_test.py
---payment_202_test.xlsx
---payment_202_test.yaml
---...
-test.py
-# 工具项
---utils
---gen_case.py
---notify.py
+```
+├── aw                                    # 各个模块的通用功能目录
+│   ├── payment                           # 支付模块
+│   │   └── payment_commont.py            # 支付模块通用功能封装，如数据格式转换，指令状态修改，协力指令更新清理，支付指令轮询监控;
+│   ├── c1_task                           # xxljob定时任务调度模块，涵盖登录取ck，定时任务手动执行
+│   ├── account                           # 账户模块
+│   ├── finaching                         # 票据模块
+│   └── commmon                           # 通用模块
+│       ├── db.py                         # 数据库操作
+│       └── auth.py                       # 登录取ck
+├── conf                                  # 各个模块配置文件，含持久化数据，如登录账号，数据库配置信息，支付账号等
+│   ├── sys
+│   │   ├── payment.yaml
+│   │   ├── account.yaml
+│   │   ├── default.yaml                  # 默认数据
+│   │   └── xxx.yaml
+├── report                                # html-report 测试报告生成
+│       └── xxx.html
+├── script                                # 测试脚本，数据+关键字驱动，支持yaml和xlsx
+│   ├── payment
+│   │   ├── payment_202_test.py
+│   │   ├── payment_202_test.xlsx
+│   │   └── payment_202_test.yaml
+│   └── test.py
+└── utils                               # 杂项工具
+    ├── gen_case.py                     # 关联自动化平台使用
+    └── notify.py                       # 通知模块，通知到im平台群组
 ```
 
 # selenium
@@ -392,4 +447,88 @@ webdriver.implicitly_wait(20)
 
 ```
 
+6、selenium开启开发者工具状态:  
+添加启动参数, `options.add_argument(--auto-open-devtools-for-tabs)`
+```python
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
+# 创建 ChromeOptions 对象
+chrome_options = Options()
+
+# 添加启动参数以打开开发者工具
+chrome_options.add_argument("--auto-open-devtools-for-tabs")
+
+# 启动 Chrome 浏览器
+driver = webdriver.Chrome(options=chrome_options)
+
+# 打开一个网页
+driver.get("https://www.example.com")
+
+# 保持浏览器打开状态
+input("按 Enter 键关闭浏览器...")
+driver.quit()
+```
+
+7、selenium开启断点:  
+使用pdb库，`pdb.set_trace()`
+```python
+import pdb
+from selenium import webdriver
+
+driver = webdriver.Chrome()
+driver.get("https://www.example.com")
+
+# 设置断点
+pdb.set_trace()
+
+# 你的测试代码
+element = driver.find_element_by_id("some-id")
+element.click()
+
+driver.quit()
+```
+
+
+8、收说ui自动化中的po模式：
+```
+selenium_test_framework/
+│
+├── config/
+│   ├── __init__.py
+│   ├── config.py          # 配置文件，包含浏览器、URL等配置
+│   └── environment.py     # 环境配置，如测试环境、生产环境等
+│
+├── data/
+│   ├── __init__.py
+│   ├── test_data.py       # 测试数据，如用户名、密码等
+│   └── test_data_loader.py # 测试数据加载器
+│
+├── pages/
+│   ├── __init__.py
+│   ├── base_page.py       # 基础页面类，包含常用的页面操作方法
+│   ├── login_page.py      # 登录页面类
+│   ├── home_page.py       # 首页页面类
+│   └── ...                # 其他页面类
+│
+├── tests/
+│   ├── __init__.py
+│   ├── conftest.py        # 测试配置文件，包含fixture等
+│   ├── test_login.py      # 登录测试用例
+│   ├── test_home.py       # 首页测试用例
+│   └── ...                # 其他测试用例
+│
+├── utils/
+│   ├── __init__.py
+│   ├── browser_manager.py # 浏览器管理类，负责启动、关闭浏览器
+│   ├── logger.py          # 日志记录器
+│   ├── screenshot.py      # 截图工具
+│   └── ...                # 其他工具类
+│
+├── reports/
+│   └── ...                # 测试报告存放目录
+│
+├── requirements.txt       # 项目依赖文件
+├── README.md              # 项目说明文件
+└── run_tests.py           # 测试执行入口文件
+```
