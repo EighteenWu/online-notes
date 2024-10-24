@@ -326,6 +326,32 @@ def select_sort(alist):
 - **迭代器**：需要显式实现 `__iter__()` 和 `__next__()` 方法，适用于需要复杂控制或显式管理的场景。
 - **生成器**：通过 `yield` 关键字实现，自动管理状态，适用于惰性计算和简化迭代逻辑的场景。
 
+#### **上下文管理器的作用和原理:**  
+  在python中，上下文管理器是用来管理资源的对象，它确保在进入一个代码块(通过with语句)时进行一些初始化操作
+并且在离开时完成一些清理工作;原理是基础两个魔法方法`__enter__`和`__exit__`来实现;`__enter__方法`在进入with  
+语句时被调用，用于设置资源或者执行一些初始化代码.`__exit__`方法在离开with语句时候调用，用来关闭文件，释放链接；
+示例如下
+```python
+class FileOpener:
+    def __init__(self, file_path, mode):
+        self.file_path = file_path
+        self.mode = mode
+        self.file = None
+
+    def __enter__(self):
+        self.file = open(self.file_path, self.mode)
+        return self.file
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if self.file:
+            self.file.close()
+
+# 使用上下文管理器
+with FileOpener('test.txt', 'r') as file:
+    content = file.read()
+    print(content)
+```
+
 
 # pytest
 
