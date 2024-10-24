@@ -6,10 +6,10 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
-/.idea/
 /vcs.xml
 /sonarlint/issuestore/2/7/273efb06f2d5075cb33cf710a5c08d90fde06ba2
 /sonarlint/securityhotspotstore/2/7/273efb06f2d5075cb33cf710a5c08d90fde06ba2
 /sonarlint/issuestore/f/4/f4ad0d0b9dd38f4cc91f3ede0ef069beb41a1412
 /sonarlint/securityhotspotstore/f/4/f4ad0d0b9dd38f4cc91f3ede0ef069beb41a1412
 .gitignore
+.idea/

@@ -58,7 +58,15 @@ str_a = 'abcd'
 if str_a == str_a[::-1]:
   print(True)
 ```
-
+```python
+# 判断回文字符串,只包括字母数字，并且忽略大小写
+def is_palindrome(s):
+    clean_str = ""
+    for char in s:
+        if char.isalnum():
+            clean_str += char 
+    return clean_str == clean_str[::-1]
+```
 # python进阶
 
 #### ** 用过异常吗？怎么捕获处理异常，其中try，except，else，final怎么用，raise呢？
@@ -114,6 +122,31 @@ def sum_a():
 函数sum_a则作为参数传入到`run_time`内；
 2、使用闭包。其中wrapper可以访问到外部装饰器的变量func，也可以保持内部局部变量的独立性;
 3、使用语法糖@
+
+#### **如果一个函数使用了多个装饰器，他的执行顺序是怎么样的？**
+```python
+def decorator1(func):
+    def wrapper():
+        print("Decorator 1 start")
+        func()
+        print("Decorator 1 end")
+    return wrapper
+
+def decorator2(func):
+    def wrapper():
+        print("Decorator 2 start")
+        func()
+        print("Decorator 2 end")
+    return wrapper
+
+@decorator1
+@decorator2
+def my_function():
+    print("Function")
+
+my_function()
+# 从最靠近函数的装饰器由内向外开始执行
+```
 
 #### **python内的魔术方法有哪些，简单介绍一下**
 
@@ -445,10 +478,10 @@ time.sleep(3)
 
 webdriver = webdriver.chrome()
 
-# 显示等待
+# 显示等待 判断某个条件是否存在。
 WebDriverWait(webdriver, 4).until(EC.visibility_of_element_located(locator))
 
-# 隐式等待
+# 隐式等待 固定轮询等待，元素如果在对应时间内没有展示则抛出异常
 webdriver.implicitly_wait(20)
 
 ```
