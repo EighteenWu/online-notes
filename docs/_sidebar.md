@@ -8,9 +8,16 @@
             - [路径参数](/python/fastapi/路径参数.md)
             - [请求体](/python/fastapi/请求体.md)
             - [踩坑记录](/python/fastapi/踩坑记录.md)
+        - python-core
+            - [print&None](/python/python_core/print&None.md)
+            - [python基础概念](/python/python_core/python基础概念.md)
+            - [基础语法数值类型.md](/python/python_core/基础语法数值类型.md)
+            - [请求体](/python/python_core/闭包装饰器lambda柯里化.md)
     - 杂项
         - [windows下tree命令](/misc/windows下tree命令.md)
-    - 面试
+        - Git
+        - [git 修改已push得备注](/misc/git/gitrebase.md)
+    - 面试方便路上看
         - [Linux基础](/misc/testing/Linux基础.md)
         - [mysql基础](/misc/testing/mysql基础.md)
         - [性能测试](/misc/testing/性能测试.md)
