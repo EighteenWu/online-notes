@@ -353,6 +353,14 @@ with FileOpener('test.txt', 'r') as file:
 ```
 
 
+**使用map将一个list内的元素都转换为字符串?**
+```python
+my_list = [1, 2, 3, 4, 5]
+str_list = list(map(str, my_list))
+print(str_list)
+```
+
+
 # pytest
 
 1、pytest运行用例？  
@@ -462,7 +470,7 @@ def test_sum(data):
 ```
 
 10、两个test文件之间如何传递变量?
-使用装饰器存到数组内,然后再取出；也可以使用fixture调用接口1,scope设置为`session`,然后返回给接口2;
+使用装饰器存到数组内, 然后再取出；也可以使用fixture调用接口1,scope设置为`session`,然后返回给接口2;
 ```python
 variables = {}
 
