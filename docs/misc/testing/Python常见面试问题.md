@@ -461,6 +461,66 @@ def test_sum(data):
     └── notify.py                       # 通知模块，通知到im平台群组
 ```
 
+10、两个test文件之间如何传递变量?
+使用装饰器存到数组内,然后再取出；也可以使用fixture调用接口1,scope设置为`session`,然后返回给接口2;
+```python
+variables = {}
+
+def variable_decorator(func):
+    def wrapper(*args, **kwargs):
+        if func.__name__ == 'store_variable':
+            variables[args[0]] = args[1]
+            return None
+        elif func.__name__ == 'read_variable':
+            return variables.get(args[0], None)
+        else:
+            return func(*args, **kwargs)
+    return wrapper
+
+@variable_decorator
+def store_variable(name, value):
+    pass
+
+@variable_decorator
+def read_variable(name):
+    pass
+
+store_variable('my_var', 42)
+result = read_variable('my_var')
+print(result)  # 输出 42
+```
+
+11、上传文件接口调用?
+```python
+import requests
+header = {
+    'Authorization': '1677034306556',
+    'Connection': 'keep-alive',
+    # 'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundaryFXTT4S1LKA1LUDBd',
+    'Cookie': 'SHIROJSESSIONID=75ace860-0f00-4db0-9440-6c6d53cdf101',
+    'Host': 'host:8088',
+    'Origin': 'http://host:8088',
+    'Referer': 'http://host:8088/njfxq/search/clue/clueFeedBackDetailAll?id=1574192996457648130&Paramspage=clue&caseId=1567439544410976257',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36'
+}
+'''
+    正确的格式应该是传入一个元组，格式为：(<fileName>,<fileObject>,<Content-Type>) ，这里的fileObject是指具体的值。
+    正确的请求体应为：
+        fileObject = {
+            'type':(None,'6',None),
+            'orgType': (None,'B',None),
+            'file': ('上传文件.xlsx',open('上传文件.xlsx','rb'),'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        }
+'''
+fileObject = {
+    'type':(None,'6',None),
+    'orgType': (None,'B',None),
+    'file': ('上传文件.xlsx',open('上传文件.xlsx','rb'),'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+}
+req = requests.post('http://host:8088/njfxq/finance/investigatefeedback/uploadFile',headers=header,files=fileObject)
+print(req.text)
+```
+
 # selenium
 
 1、webdriver原理？

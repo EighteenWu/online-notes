@@ -12,11 +12,11 @@
             - [print&None](/python/python_core/print&None.md)
             - [python基础概念](/python/python_core/python基础概念.md)
             - [基础语法数值类型.md](/python/python_core/基础语法数值类型.md)
-            - [请求体](/python/python_core/闭包装饰器lambda柯里化.md)
+            - [闭包装饰器lambda柯里化](/python/python_core/闭包装饰器lambda柯里化.md)
     - 杂项
         - [windows下tree命令](/misc/windows下tree命令.md)
         - Git
-        - [git 修改已push得备注](/misc/git/gitrebase.md)
+            - [git 修改已push得备注](/misc/git/gitrebase.md)
     - 面试方便路上看
         - [Linux基础](/misc/testing/Linux基础.md)
         - [mysql基础](/misc/testing/mysql基础.md)
