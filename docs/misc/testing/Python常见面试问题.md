@@ -371,6 +371,7 @@ A: 测试文件以test_*.py或者*_test.py结尾;测试用例以test开头的函
 
 * 用于设置测试前的环境或者初始化数据,以及测试后的清理工作;
 * 通过装饰器@pytest.fixture来标记，并通过函数参数注入到用例中;
+* 提高代码复用性
 
 ```python
 import pytest
@@ -469,8 +470,10 @@ def test_sum(data):
     └── notify.py                       # 通知模块，通知到im平台群组
 ```
 
+
 10、两个test文件之间如何传递变量?
-使用装饰器存到数组内, 然后再取出；也可以使用fixture调用接口1,scope设置为`session`,然后返回给接口2;
+使用装饰器存到数组内, 然后再取出；也可以使用fixture调用接口1,scope设置为`session`,然后返回给接口2;  
+也可以使用pytest-cache来实现，cache一般是pytest自带的一个插件，具体使用`cache.set('my_data', 42)`，取出数据`data = cache.get('my_data', None)`
 ```python
 variables = {}
 
@@ -665,3 +668,28 @@ selenium_test_framework/
 ├── README.md              # 项目说明文件
 └── run_tests.py           # 测试执行入口文件
 ```
+
+**9、selenium切换窗口、iframe、弹窗**
+切换窗口
+```python
+# 切换弹窗
+current_window = driver.current_window_handle
+all_windows = driver.window_handles
+for window in all_windows:
+    if window!= current_window:
+      driver.switch_to.window(window)
+```
+切换iframe
+```python
+driver.switch_to.frame("my_iframe")
+```
+切换到alert弹窗
+```python
+alert = driver.switch_to.alert
+alert_text = alert.text
+print(alert_text)
+```
+
+**10、selenium对于一闪而过的提示信息如何处理？**
+1、对于该元素设置显示等待;
+2、使用js将该元素display设置为可见不隐藏;
