@@ -371,7 +371,6 @@ A: 测试文件以test_*.py或者*_test.py结尾;测试用例以test开头的函
 
 * 用于设置测试前的环境或者初始化数据,以及测试后的清理工作;
 * 通过装饰器@pytest.fixture来标记，并通过函数参数注入到用例中;
-* 提高代码复用性
 
 ```python
 import pytest
@@ -470,10 +469,8 @@ def test_sum(data):
     └── notify.py                       # 通知模块，通知到im平台群组
 ```
 
-
 10、两个test文件之间如何传递变量?
-使用装饰器存到数组内, 然后再取出；也可以使用fixture调用接口1,scope设置为`session`,然后返回给接口2;  
-也可以使用pytest-cache来实现，cache一般是pytest自带的一个插件，具体使用`cache.set('my_data', 42)`，取出数据`data = cache.get('my_data', None)`
+使用装饰器存到数组内, 然后再取出；也可以使用fixture调用接口1,scope设置为`session`,然后返回给接口2;
 ```python
 variables = {}
 
