@@ -24,7 +24,7 @@ A:**原子性**: 事务中的全部操作在数据库中是不可以被分割的
 select *
 from tablename
 limit 20 offset 10;
-#limit后面+限制的条数，offset则是偏移量;
+# limit后面+限制的条数，offset则是偏移量;
 ```
 
 6、MySql基本操作?
@@ -108,7 +108,7 @@ WHERE sc1.cid = '001'
 # 2、使用自链接查询
 SELECT sid
 from SC sc1
-       join SC sc2 ON sc1.sid = sc2.sid
+         join SC sc2 ON sc1.sid = sc2.sid
 where sc1.cid = '001'
   and sc2.cid = '002'
   AND sc1.score > sc2.score;
@@ -127,10 +127,19 @@ VALUES ("李四");
 
 # 问题4 删除学习叶平老师课程的sc表记录;
 DELETE
+FROM SC sc1
+where sc1.cid = (select cs1.cid
+                 from Course cs1
+                          JOIN Teacher te1 ON cs1.tid = te1.tid
+                 where te1.Tname = '叶平')
+
+
+
+DELETE
 FROM SC
 WHERE cid = (SELECT cid
              From Teacher t1
-                    join Course c1 ON t1.tid = c1.tid
+                      join Course c1 ON t1.tid = c1.tid
              where t1.Tname = "李平")
 ```
 
